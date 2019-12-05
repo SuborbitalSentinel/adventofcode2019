@@ -1,5 +1,25 @@
 package day1
 
+import (
+	"fmt"
+	"strconv"
+)
+
+// Run day one of advent
+func Run(input <-chan string) {
+	simplifiedRequiredFuel := 0
+	totalRequiredFuel := 0
+
+	for line := range input {
+		moduleMass, _ := strconv.Atoi(line)
+		simplifiedRequiredFuel += CalculateSimplifiedRequiredFuelForModule(moduleMass)
+		totalRequiredFuel += CalculateTotalRequiredFuelForModule(moduleMass, 0)
+	}
+
+	fmt.Println("Day1 -- Part1: ", simplifiedRequiredFuel)
+	fmt.Println("Day1 -- Part2: ", totalRequiredFuel)
+}
+
 // CalculateSimplifiedRequiredFuelForModule problem 1 -- part 1
 func CalculateSimplifiedRequiredFuelForModule(mass int) int {
 	return (mass / 3) - 2
