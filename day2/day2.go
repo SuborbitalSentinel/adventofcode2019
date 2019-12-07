@@ -19,6 +19,13 @@ func processOpCode(code int, reg1 int, reg2 int) int {
 
 }
 
+func getRegisterValue(input []string, idx int) int {
+	valueIndex, _ := strconv.Atoi(input[idx])
+	value, _ := strconv.Atoi(input[valueIndex])
+
+	return value
+}
+
 // Run day two of advent
 func Run(input <-chan string) {
 
@@ -31,11 +38,21 @@ func Run(input <-chan string) {
 			break
 		}
 
-		firstRegister, _ := strconv.Atoi(intcodes[currentOpCodeIndex+1])
-		secondRegister, _ := strconv.Atoi(intcodes[currentOpCodeIndex+2])
+		firstRegister := getRegisterValue(intcodes, currentOpCodeIndex+1)
+		secondRegister := getRegisterValue(intcodes, currentOpCodeIndex+2)
 		outputRegister, _ := strconv.Atoi(intcodes[currentOpCodeIndex+3])
+		//fmt.Println(fmt.Sprintf("%v %v %v %v %v", "Full OpCode index:", currentOpCodeIndex, currentOpCodeIndex+1, currentOpCodeIndex+2, currentOpCodeIndex+3))
+		//fmt.Println(fmt.Sprintf("%v %v %v %v %v", "Full OpCode:", currentOpCode, firstRegister, secondRegister, outputRegister))
+
+		//fmt.Println(fmt.Sprintf("%v %v", "Registers before:", intcodes))
+		//fmt.Println(fmt.Sprintf("%v %v %v %v %v", "OpCode was:", currentOpCode, "with values:", firstRegister, secondRegister))
+		//fmt.Println(fmt.Sprintf("%v %v %v %v", "Output before:", intcodes[outputRegister], "in Register:", outputRegister))
 
 		intcodes[outputRegister] = strconv.Itoa(processOpCode(currentOpCode, firstRegister, secondRegister))
+
+		//fmt.Println(fmt.Sprintf("%v %v %v %v", "Output after:", intcodes[outputRegister], "in Register:", outputRegister))
+		//fmt.Println(fmt.Sprintf("%v %v", "Registers after:", intcodes))
+		//fmt.Println("")
 
 		currentOpCodeIndex += 4
 	}
