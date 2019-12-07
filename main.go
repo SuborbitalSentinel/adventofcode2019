@@ -8,5 +8,5 @@ import (
 
 func main() {
 	day1.Run(util.Readlines("day1/input"))
-	day2.Run(util.Readlines("day2/input"))
+	day2.Run(util.Readwords("day2/input"))
 }
