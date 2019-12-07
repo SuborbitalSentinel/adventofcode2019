@@ -5,8 +5,8 @@ import (
 	"os"
 )
 
-// ReadWordsToArray returns an array insead of a channel
-func ChannelToArray(input <-chan string) []string {
+// ChannelToArray returns an array insead of a channel
+func ChannelToSlice(input <-chan string) []string {
 	var output []string
 
 	for input := range input {
