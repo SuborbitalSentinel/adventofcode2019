@@ -19,7 +19,6 @@ func Run() {
 
 		if alwaysAscendingDigits(i) && onlyTwoAdjacentDigitsAreSame(i) {
 			part2++
-
 		}
 	}
 
@@ -28,26 +27,33 @@ func Run() {
 }
 
 func onlyTwoAdjacentDigitsAreSame(input int) bool {
-	panic("Finish this method, wrong right now")
-	//digits := []rune(strconv.Itoa(input))
+	digits := []rune(strconv.Itoa(input))
 
-	//possiblyMet := false
-	//previousDigit := digits[0]
-	//for _, digit := range digits[1:] {
-	//	if possiblyMet {
-	//		if digit != previousDigit {
-	//			return true
-	//		}
-	//		possiblyMet = false
-	//	}
+	possiblyMet := false
+	digitsInARow := 1
+	previousDigit := digits[0]
+	for i, digit := range digits[1:] {
+		if (possiblyMet && digit != previousDigit && digitsInARow == 2) || (i == len(digits[1:])-1 && digit == previousDigit && digitsInARow == 1) {
+			return true
+		}
 
-	//	if digit == previousDigit {
-	//		possiblyMet = true
-	//	}
+		if possiblyMet && digit != previousDigit && digitsInARow > 2 {
+			possiblyMet = false
+			digitsInARow = 1
+		}
 
-	//	previousDigit = digit
-	//}
-	//return false
+		if possiblyMet && digit == previousDigit {
+			digitsInARow++
+		}
+
+		if !possiblyMet && digit == previousDigit {
+			possiblyMet = true
+			digitsInARow++
+		}
+
+		previousDigit = digit
+	}
+	return false
 }
 
 func atLeastTwoAdjacentDigitsAreSame(input int) bool {
