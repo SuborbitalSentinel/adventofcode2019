@@ -5,6 +5,7 @@ import (
 	"github.com/millera023/adventofcode/day2"
 	"github.com/millera023/adventofcode/day3"
 	"github.com/millera023/adventofcode/day4"
+	"github.com/millera023/adventofcode/day5"
 	"github.com/millera023/adventofcode/util"
 )
 
@@ -13,4 +14,5 @@ func main() {
 	day2.Run(util.Readwords("day2/input"))
 	day3.Run(util.Readlines("day3/input"))
 	day4.Run() // No input required
+	day5.Run(util.Readwords("day5/input"))
 }
