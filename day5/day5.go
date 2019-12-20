@@ -40,7 +40,7 @@ func processOpCode(opCodeIndex int, program []string) int {
 		paramMode2 := paramModes[1]
 		reg1, reg2 := getRegisterValues(program, program[opCodeIndex+1], program[opCodeIndex+2], paramMode1, paramMode2)
 
-		program[outputIndex(program, opCodeIndex+3)] = strconv.Itoa(reg1 + reg2)
+		program[ptrValue(program, opCodeIndex+3)] = strconv.Itoa(reg1 + reg2)
 		return alu
 
 	case "02":
@@ -48,7 +48,7 @@ func processOpCode(opCodeIndex int, program []string) int {
 		paramMode2 := paramModes[1]
 		reg1, reg2 := getRegisterValues(program, program[opCodeIndex+1], program[opCodeIndex+2], paramMode1, paramMode2)
 
-		program[outputIndex(program, opCodeIndex+3)] = strconv.Itoa(reg1 * reg2)
+		program[ptrValue(program, opCodeIndex+3)] = strconv.Itoa(reg1 * reg2)
 		return alu
 
 	case "03":
@@ -57,7 +57,7 @@ func processOpCode(opCodeIndex int, program []string) int {
 		input, _ := reader.ReadString('\n')
 		input = strings.Replace(input, "\n", "", -1)
 
-		program[outputIndex(program, opCodeIndex+1)] = input
+		program[ptrValue(program, opCodeIndex+1)] = input
 		return io
 
 	case "04":
@@ -65,7 +65,7 @@ func processOpCode(opCodeIndex int, program []string) int {
 		if paramMode1 == "1" {
 			fmt.Println("Output: ", program[opCodeIndex+1])
 		} else {
-			fmt.Println("Output: ", program[outputIndex(program, opCodeIndex+1)])
+			fmt.Println("Output: ", program[ptrValue(program, opCodeIndex+1)])
 		}
 
 		return io
@@ -75,7 +75,7 @@ func processOpCode(opCodeIndex int, program []string) int {
 	}
 }
 
-func outputIndex(program []string, programPointer int) int {
+func ptrValue(program []string, programPointer int) int {
 	outputRegisterIndex, _ := strconv.Atoi(program[programPointer])
 
 	return outputRegisterIndex
